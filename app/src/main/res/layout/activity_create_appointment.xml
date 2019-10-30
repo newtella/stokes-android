@@ -18,14 +18,14 @@
         android:layout_height="60dp"
         android:gravity="center_horizontal"
         android:text="@string/label_create_appointment"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/white" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvStep1"
         app:contentPadding="12dp"
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/white"
         app:cardElevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -51,8 +51,9 @@
                 android:text="@string/label_specialty"/>
 
             <Spinner
+                android:id="@+id/spinnerSpecialties"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_marginTop="8dp"
@@ -82,16 +83,122 @@
                     android:text="@string/type3" />
             </RadioGroup>
 
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                style="@style/menu_button"
+                android:text="@string/btn_next" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right"
-        style="@style/menu_button"
-        android:text="@string/btn_next" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvStep2"
+        android:visibility="gone"
+        app:contentPadding="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_doctor"/>
+
+                <Spinner
+                    android:id="@+id/spinnerDoctors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_scheduled_date"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RadioGroup
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08:00 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08:30 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:30 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:30 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11:00 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11:30 AM" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01:00 PM" />
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/btnConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    style="@style/menu_button"
+                    android:text="@string/btn_next" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

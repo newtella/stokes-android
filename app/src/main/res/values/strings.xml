@@ -25,5 +25,7 @@
     <string name="type2">Examen</string>
     <string name="type3">Operacion</string>
     <string name="btn_next">Siguiente</string>
+    <string name="label_doctor">Médico</string>
+    <string name="label_scheduled_date">Fecha para la cita</string>
 
 </resources>
