@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Stokes</string>
+    <string name="log_in_tittle">Inicio de Sesion</string>
+    <string name="label_email">Correo</string>
+    <string name="label_password">Contraseña</string>
+    <string name="btn_log_in">Ingresar</string>
+    <string name="label_register">¿Aun no te has registrado?</string>
+    <string name="sub_tittle_label">Ingresa los datos para iniciar sesion</string>
+    <string name="label_register_tittle">Registro</string>
+    <string name="label_register_subTittle">Ingresa los datos que se le solicitan</string>
+    <string name="label_register_fullName">Nombre Completo</string>
+    <string name="btn_register">Darme de alta</string>
+    <string name="label_register_log_in">¿Ya tienes una cuenta? Inicia Sesion Aqui</string>
+    <string name="please_fill_your_register_data">Por favor completa tus datos</string>
+    <string name="btn_create_appointment">RESERVAR CITA</string>
+    <string name="btn_my_appointments">MIS CITAS</string>
+    <string name="btn_log_out">CERRAR SESIÓN</string>
+    <string name="stokes_welcome">Bienvenido</string>
+    <string name="welcome_message_log_in">Sesión iniciada con exito</string>
+    <string name="label_create_appointment">Reservar cita</string>
+    <string name="label_description">Descripcion</string>
+    <string name="label_type">Tipo de Cita</string>
+    <string name="label_specialty">Especialidad</string>
+    <string name="type1">Consulta</string>
+    <string name="type2">Examen</string>
+    <string name="type3">Operacion</string>
+    <string name="btn_next">Siguiente</string>
+
+</resources>
