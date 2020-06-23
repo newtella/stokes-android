@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="12dp"
-    android:background="@drawable/bg_gradient"
+    android:animateLayoutChanges="true"
     tools:context=".CreateAppointmentActivity">
 
     <TextView
@@ -24,6 +25,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvStep1"
+        android:visibility="gone"
         app:contentPadding="12dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
@@ -98,7 +100,6 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvStep2"
-        android:visibility="gone"
         app:contentPadding="12dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
@@ -132,95 +133,57 @@
                     android:text="@string/label_scheduled_date"/>
 
                 <EditText
+                    android:id="@+id/etScheduleDate"
+                    android:onClick="onClickScheduleDate"
+                    android:inputType="date"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <RadioGroup
-                    android:layout_marginTop="8dp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/radioGroupLeft"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="08:00 AM" />
+                        android:orientation="vertical">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:00 AM" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:00 AM" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/radioGroupRight"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="08:30 AM" />
+                        android:orientation="vertical">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="09:00 AM" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:00 AM" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:00 AM" />
+                    </LinearLayout>
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="09:30 AM" />
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10:00 AM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10:30 AM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11:00 AM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11:30 AM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="01:00 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="01:30 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="02:00 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="02:30 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="03:00 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="03:30 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="04:00 PM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="04:30 PM" />
-                </RadioGroup>
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btnConfirm"

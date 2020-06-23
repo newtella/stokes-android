@@ -9,8 +9,8 @@
     </style>
     
     <style name="menu_button" parent="@style/Widget.AppCompat.Button.Colored">
-        <item name="android:paddingLeft">120dp</item>
-        <item name="android:paddingRight">120dp</item>
+        <item name="android:paddingLeft">90dp</item>
+        <item name="android:paddingRight">90dp</item>
         <item name="android:layout_height">60dp</item>
     </style>
 

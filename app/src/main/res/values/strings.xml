@@ -24,8 +24,13 @@
     <string name="type1">Consulta</string>
     <string name="type2">Examen</string>
     <string name="type3">Operacion</string>
-    <string name="btn_next">Siguiente</string>
+    <string name="btn_next">Siguiente </string>
     <string name="label_doctor">Médico</string>
     <string name="label_scheduled_date">Fecha para la cita</string>
+    <string name="date_format">%1$d-%2$s-%3$s</string>
+    <string name="item_appointment_id">"Cita medica # %1$d"</string>
+    <string name="item_appointment_date">"el dia: %1$s"</string>
+    <string name="item_appointment_time">"a las: %1$s"</string>
+    <string name="label_my_appointments">Mis citas medicas</string>
 
 </resources>
