@@ -21,7 +21,7 @@
         <activity android:name=".RegisterActivity"
             android:launchMode="singleInstance" />
 
-        <activity android:name=".MainActivity" android:launchMode="singleInstance">
+        <activity android:theme="@style/AppTheme2" android:name=".MainActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
