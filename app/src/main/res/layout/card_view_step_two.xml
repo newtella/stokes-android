@@ -47,8 +47,7 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:inputType="date"
-                android:maxLines="1"
-                android:onClick="onClickScheduleDate" />
+                android:maxLines="1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

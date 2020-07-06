@@ -11,12 +11,15 @@
     <color name="colorAccent">#FF4081</color>
     <color name="darkBlue">#3023AE</color>
     <color name="purple">#c86dd7</color>
+    <color name="darkpurple">#673EFA</color>
+    <color name="aqua">#40D9FF</color>
+    <color name="green">#1FFFB9</color>
 
     <color name="loginFormDetails">#ccffffff</color>
     <color name="loginFormDetailsLight">#1affffff</color>
     <color name="LoginFormDetailsMedium">#66ffffff</color>
 
     <color  name="white">#ffff</color>
-    <color name="whiteTransparent">#8FFFFFFF</color>
+    <color name="whiteTransparent">#DAFFFFFF</color>
 
 </resources>

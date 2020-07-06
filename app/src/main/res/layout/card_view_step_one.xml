@@ -45,30 +45,33 @@
             android:text="@string/label_type" />
 
         <RadioGroup
-            android:checkedButton="@id/rbType1"
             android:id="@+id/radioGroupType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:checkedButton="@id/rbType1"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/rbType1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/type1" />
+                android:layout_height="31dp"
+                android:text="@string/type1"
+                android:textSize="14sp" />
 
             <RadioButton
                 android:id="@+id/rbType2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/type2" />
+                android:layout_height="31dp"
+                android:text="@string/type2"
+                android:textSize="14sp" />
 
             <RadioButton
                 android:id="@+id/rbType3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/type3" />
+                android:layout_height="31dp"
+                android:text="@string/type3"
+                android:textSize="14sp" />
         </RadioGroup>
 
 
