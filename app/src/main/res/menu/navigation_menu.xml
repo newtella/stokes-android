@@ -11,14 +11,13 @@
         android:title="Consultas"/>
 
     <item
-        android:id="@+id/bottom_menu_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="Configuracion"/>
-
-    <item
-        android:id="@+id/bottom_account_settings"
+        android:id="@+id/bottom_menu_account"
         android:icon="@drawable/ic_account"
         android:title="Perfil"/>
 
+    <item
+        android:id="@+id/bottom_menu_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Configuracion"/>
 
 </menu>

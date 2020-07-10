@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.codigogt.stokes.model.Appointment
-import kotlinx.android.synthetic.main.item_appointment.view.*
+import kotlinx.android.synthetic.main.fragment_account_date_item_appointment.view.*
 
 class AppointmentAdapter(private val appointments: ArrayList<Appointment>):
     RecyclerView.Adapter<AppointmentAdapter.ViewHolder>() {
@@ -23,14 +23,12 @@ class AppointmentAdapter(private val appointments: ArrayList<Appointment>):
     // Inflar XML items
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_appointment, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.fragment_account_date_item_appointment, parent, false)
         )
     }
 
-
     // Devolver la cantidad de elementos
     override fun getItemCount() = appointments.size
-
 
     // Bind de la data
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
