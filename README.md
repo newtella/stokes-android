@@ -16,4 +16,4 @@ Its a mobile version over android of Stokes App, application for the management 
 
 ## Screenshots
 
-![Stokes](app/captures/stokesv0.2.gif "Stokes")
+![Stokes](app/captures/stokesv0.3.gif "Stokes")
