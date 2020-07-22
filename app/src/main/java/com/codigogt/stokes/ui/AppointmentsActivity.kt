@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_account_dates.*
 
 class AppointmentsActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+/*    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_account_dates)
 
@@ -24,9 +24,15 @@ class AppointmentsActivity : AppCompatActivity() {
         appointments.add(
             Appointment(3, "Tomas", "22/06/2020", "03:00 PM")
         )
+        appointments.add(
+            Appointment(4, "T", "22/06/2020", "03:00 PM")
+        )
+        appointments.add(
+            Appointment(5, "H", "22/06/2020", "03:00 PM")
+        )
 
         rvAppointments.layoutManager = LinearLayoutManager(this)
         rvAppointments.adapter =
             AppointmentAdapter(appointments)
-    }
+    }*/
 }

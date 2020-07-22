@@ -28,9 +28,9 @@
     <string name="label_doctor">Médico</string>
     <string name="label_scheduled_date">Fecha para la cita</string>
     <string name="date_format">%1$d-%2$s-%3$s</string>
-    <string name="item_appointment_id">"Cita medica # %1$d"</string>
+    <string name="item_appointment_id">"Cita medica: %1$d"</string>
     <string name="item_appointment_date">"el dia: %1$s"</string>
-    <string name="item_appointment_time">"a las: %1$s"</string>
+    <string name="item_appointment_time">" a las: %1$s"</string>
     <string name="label_my_appointments">Mis citas medicas</string>
     <string name="press_back_again">Presione una vez mas para salir</string>
     <string name="dialog_create_appointment_exit_title">¿Estas seguro de que deseas salir?</string>
@@ -44,7 +44,5 @@
     <string name="validate_appointment_date">Selecciona una fecha valida</string>
     <string name="validate_appointment_time">Selecciona una hora valida</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

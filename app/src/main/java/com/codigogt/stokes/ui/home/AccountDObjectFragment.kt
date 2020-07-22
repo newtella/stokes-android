@@ -28,13 +28,13 @@ class AccountDObjectFragment : Fragment() {
 
         val appointments = ArrayList<Appointment>()
         appointments.add(
-            Appointment(1, "MedicoTest", "22/06/2020", "07:00 AM")
+            Appointment(1, "Dr. Dorian Jimenez", "22/06/2020", "07:00 AM", "Completo")
         )
         appointments.add(
-            Appointment(1, "Henry", "22/06/2020", "09:00 AM")
+            Appointment(2, "Dr. Henry Velasquez", "22/06/2020", "09:00 AM", "Pendiente")
         )
         appointments.add(
-            Appointment(1, "Tomas", "22/06/2020", "03:00 PM")
+            Appointment(3, "Dr. Tomas Cardona", "22/06/2020", "03:00 PM", "Cancelada")
         )
 
 

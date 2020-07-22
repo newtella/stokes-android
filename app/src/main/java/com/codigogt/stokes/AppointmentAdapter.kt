@@ -15,8 +15,9 @@ class AppointmentAdapter(private val appointments: ArrayList<Appointment>):
           fun bind(appointment: Appointment)= with(itemView) {
                 tvAppointmentId.text = itemView.context.getString(R.string.item_appointment_id, appointment.id)
                 tvDoctorName.text = appointment.doctorName
-                tvScheduledDate.text = itemView.context.getString(R.string.item_appointment_date, appointment.scheduledDate)
+                tvScheduledDate.text = appointment.scheduledDate
                 tvScheduledTime.text = itemView.context.getString(R.string.item_appointment_time, appointment.scheduledTime)
+                status1.text = appointment.status
           }
     }
 

@@ -23,20 +23,25 @@
             android:id="@+id/tvAppointmentId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/colorPrimary"
             tools:text="Cita medica #7" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/account_dr_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="5dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent">
@@ -50,15 +55,13 @@
 
             </LinearLayout>
 
-
+            <!--Doctor Name-->
             <LinearLayout
                 android:id="@+id/account_date_body"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 card_view:layout_constraintStart_toEndOf="@+id/account_dr_image"
                 card_view:layout_constraintTop_toTopOf="parent">
 
@@ -67,24 +70,83 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    tools:text="Medico Test" />
+                    android:fontFamily="@font/rubik"
+                    android:padding="5dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryLight"
+                    tools:text="Dr. Freddy Marroquin" />
+
+
+            </LinearLayout>
+
+            <!--DateTime Date-->
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/account_dr_image"
+                card_view:layout_constraintTop_toBottomOf="@+id/container">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_access_time" />
 
                 <TextView
                     android:id="@+id/tvScheduledDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    tools:text="Atencion el dia 22/06/2020" />
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/rubik_light"
+                    android:paddingTop="4dp"
+                    android:textSize="12sp"
+                    tools:text=" 22/06/2020" />
 
                 <TextView
                     android:id="@+id/tvScheduledTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    tools:text="A las 3:00 PM" />
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/rubik_light"
+                    android:paddingTop="4dp"
+                    android:textSize="12sp"
+                    tools:text=" - 3:00 PM" />
+
 
             </LinearLayout>
+
+            <!--Status-->
+            <LinearLayout
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:background="@drawable/layout_rounded"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/account_dr_image"
+                card_view:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_info" />
+
+                <TextView
+                    android:id="@+id/status1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/rubik_light"
+                    android:paddingTop="3dp"
+                    android:textSize="16sp"
+                    tools:text=" Completada" />
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

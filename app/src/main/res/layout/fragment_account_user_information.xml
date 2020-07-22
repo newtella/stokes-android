@@ -42,9 +42,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:drawableRight="@drawable/ic_edit"
                         android:gravity="center_vertical"
                         android:text="Datos del Paciente"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -216,7 +216,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="Alergias"
-                        android:drawableRight="@drawable/ic_priority_high"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
 
