@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.AppointmentsActivity"
-            android:parentActivityName=".ui.menu.MenuActivity"/>
-
-        <activity android:name=".ui.CreateAppointmentActivity"
-            android:parentActivityName=".ui.menu.MenuActivity" />
-
         <activity android:name=".ui.menu.MenuActivity" />
 
         <activity android:name=".ui.auth.RegisterActivity"

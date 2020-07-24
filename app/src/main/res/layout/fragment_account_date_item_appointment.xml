@@ -23,12 +23,11 @@
             android:id="@+id/tvAppointmentId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_medium"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:padding="5dp"
-            android:textColor="@color/colorPrimary"
-            tools:text="Cita medica #7" />
+            android:textColor="@color/colorPrimaryLight"
+            tools:text="Consulta #1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@id/container"
@@ -125,16 +124,14 @@
                 android:layout_height="match_parent"
                 android:gravity="bottom"
                 android:orientation="horizontal"
-                android:padding="5dp"
-                android:background="@drawable/layout_rounded"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toEndOf="@+id/account_dr_image"
                 card_view:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <ImageView
+                    android:id="@+id/date_status_icon"
                     android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_info" />
+                    android:layout_height="24dp" />
 
                 <TextView
                     android:id="@+id/status1"
