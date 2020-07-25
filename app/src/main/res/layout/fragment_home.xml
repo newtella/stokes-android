@@ -75,8 +75,8 @@
                     android:layout_marginEnd="8dp"
                     android:text="Ver mas"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/darkpurple" />
+                    android:textColor="@color/darkBlue"
+                    app:backgroundTint="@color/white" />
 
             </LinearLayout>
 
@@ -141,8 +141,8 @@
                     android:layout_marginEnd="8dp"
                     android:text="Notificar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/darkpurple" />
+                    android:textColor="@color/darkBlue"
+                    app:backgroundTint="@color/white" />
 
             </LinearLayout>
 
