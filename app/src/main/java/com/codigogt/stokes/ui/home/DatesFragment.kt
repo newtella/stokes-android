@@ -1,5 +1,6 @@
 package com.codigogt.stokes.ui.home
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
+import com.codigogt.stokes.io.ApiService
+import com.codigogt.stokes.model.Specialty
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_date_create.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_one.*
@@ -18,10 +21,19 @@ import kotlinx.android.synthetic.main.fragment_date_card_view_step_three.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_three.view.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_two.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_two.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DatesFragment: Fragment()  {
+
+    private val apiService: ApiService by lazy {
+
+        ApiService.create()
+    }
 
     private val selectedCalendar = Calendar.getInstance()
     private var selectedTimeRadioBtn: RadioButton? = null
@@ -69,9 +81,7 @@ class DatesFragment: Fragment()  {
             openFragment(homeFragment)
         }
 
-        val specialtyOptions = arrayOf("Neurologia", "Cardiologia", "Medico y Cirujano")
-        view.spinnerSpecialties.adapter =
-            ArrayAdapter<String>(requireActivity().baseContext, android.R.layout.simple_list_item_1, specialtyOptions)
+        loadSpecialties()
 
         val doctorOptions = arrayOf("Henry Diaz", "Tomas Ramos", "Dorian Velasquez")
         view.spinnerDoctors.adapter =
@@ -84,6 +94,31 @@ class DatesFragment: Fragment()  {
             showDatePickerDialog()}
 
         return view
+    }
+
+    private fun loadSpecialties(){
+       val call = apiService.getAllSpecialties()
+
+        call.enqueue(object :Callback<ArrayList<Specialty>> {
+
+            override fun onResponse(
+                call: Call<ArrayList<Specialty>>,
+                response: Response<ArrayList<Specialty>>
+            ) {
+                if(response.isSuccessful){
+                    val specialty = response.body()
+                    val specialtyOptions = ArrayList<String>()
+                    specialty?.forEach {
+                        specialtyOptions.add(it.name)
+                    }
+                    spinnerSpecialties.adapter = ArrayAdapter<String>(requireActivity().baseContext, android.R.layout.simple_list_item_1, specialtyOptions)
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Specialty>>, t: Throwable) {
+                Toast.makeText(activity, "Ocurrio un Error al cargar las especialidades", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun openFragment(fragment: Fragment){
