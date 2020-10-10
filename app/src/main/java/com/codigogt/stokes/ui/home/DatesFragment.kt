@@ -1,17 +1,18 @@
 package com.codigogt.stokes.ui.home
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
 import com.codigogt.stokes.io.ApiService
+import com.codigogt.stokes.model.Doctor
 import com.codigogt.stokes.model.Specialty
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_date_create.*
@@ -83,14 +84,10 @@ class DatesFragment: Fragment()  {
 
         loadSpecialties()
 
-        val doctorOptions = arrayOf("Henry Diaz", "Tomas Ramos", "Dorian Velasquez")
-        view.spinnerDoctors.adapter =
-            ArrayAdapter<String>(requireActivity().baseContext, android.R.layout.simple_list_item_1, doctorOptions)
-
         val onClickCalendar = view.findViewById<View>(R.id.etScheduleDate)
 
         onClickCalendar.setOnClickListener {
-            Toast.makeText(activity, "aqui si llega", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Selecciona una fecha", Toast.LENGTH_SHORT).show()
             showDatePickerDialog()}
 
         return view
@@ -106,17 +103,54 @@ class DatesFragment: Fragment()  {
                 response: Response<ArrayList<Specialty>>
             ) {
                 if(response.isSuccessful){
-                    val specialty = response.body()
-                    val specialtyOptions = ArrayList<String>()
-                    specialty?.forEach {
-                        specialtyOptions.add(it.name)
-                    }
-                    spinnerSpecialties.adapter = ArrayAdapter<String>(requireActivity().baseContext, android.R.layout.simple_list_item_1, specialtyOptions)
+                    val specialties = response.body()
+                    spinnerSpecialties.adapter = ArrayAdapter<Specialty>(requireActivity().baseContext, android.R.layout.simple_list_item_1,
+                        specialties!!
+                    )
+                    listenSpecialtyChange()
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Specialty>>, t: Throwable) {
                 Toast.makeText(activity, "Ocurrio un Error al cargar las especialidades", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun listenSpecialtyChange(){
+        spinnerSpecialties?.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                adapter: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val specialty = adapter?.getItemAtPosition(position) as Specialty
+                loadDoctors(specialty.id)
+            }
+        }
+    }
+
+    private fun loadDoctors(specialtyId: Int){
+        val call =  apiService.getDoctorBySpecialty(specialtyId)
+        call.enqueue(object : Callback<ArrayList<Doctor>>{
+            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
+                Toast.makeText(activity, "Ocurrio un problema al cargar los medicos", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(
+                call: Call<ArrayList<Doctor>>,
+                response: Response<ArrayList<Doctor>>
+            ) {
+                if(response.isSuccessful){
+                    val doctors = response.body()
+                    spinnerDoctors.adapter = ArrayAdapter<Doctor>(requireActivity().baseContext, android.R.layout.simple_list_item_1,
+                        doctors!!
+                    )
+                }
             }
         })
     }
