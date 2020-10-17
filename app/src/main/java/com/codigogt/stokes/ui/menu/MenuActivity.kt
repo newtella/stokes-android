@@ -3,6 +3,7 @@ package com.codigogt.stokes.ui.menu
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
 import com.codigogt.stokes.ui.home.AccountFragment
@@ -73,4 +74,5 @@ class MenuActivity : AppCompatActivity() {
         editor.putBoolean("session", false)
         editor.apply()
     }
+
 }

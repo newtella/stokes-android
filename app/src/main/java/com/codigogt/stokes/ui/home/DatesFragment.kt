@@ -2,6 +2,8 @@ package com.codigogt.stokes.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
 import com.codigogt.stokes.io.ApiService
 import com.codigogt.stokes.model.Doctor
+import com.codigogt.stokes.model.Schedule
 import com.codigogt.stokes.model.Specialty
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_date_create.*
@@ -74,6 +77,7 @@ class DatesFragment: Fragment()  {
                     cvStep3.visibility = View.VISIBLE
                 }
             }
+
         }
 
         view.btnConfirmAppointment.setOnClickListener {
@@ -84,13 +88,126 @@ class DatesFragment: Fragment()  {
 
         loadSpecialties()
 
+
         val onClickCalendar = view.findViewById<View>(R.id.etScheduleDate)
 
-        onClickCalendar.setOnClickListener {
-            Toast.makeText(activity, "Selecciona una fecha", Toast.LENGTH_SHORT).show()
-            showDatePickerDialog()}
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listenDoctorAndDateChange()
+
+        etScheduleDate.setOnClickListener {
+            val year = selectedCalendar.get(Calendar.YEAR)
+            val month = selectedCalendar.get(Calendar.MONTH)
+            val dayOfMonth = selectedCalendar.get(Calendar.DAY_OF_MONTH)
+
+            val listener = DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
+                // Toast.makeText(this, "$y-$m-$d", Toast.LENGTH_SHORT).show()
+                selectedCalendar.set(y, m, d)
+
+                view?.etScheduleDate?.setText(
+                    resources.getString(
+                        R.string.date_format,
+                        y,
+                        (m+1).twoDigits(),
+                        d.twoDigits()
+                    )
+                )
+                view?.etScheduleDate?.error = null
+            }
+
+            // new dialog
+            val datePickerDialog =
+                activity?.let { it1 -> DatePickerDialog(it1, listener, year, month, dayOfMonth) }
+
+            // set limits
+            val datePicker = datePickerDialog?.datePicker
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+            datePicker?.minDate = calendar.timeInMillis // +1
+            calendar.add(Calendar.DAY_OF_MONTH, 29)
+            datePicker?.maxDate = calendar.timeInMillis // +30
+
+            // show dialog
+            datePickerDialog?.show()
+        }
+    }
+
+    private fun listenDoctorAndDateChange() {
+        spinnerDoctors?.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                adapter: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val doctor = adapter?.getItemAtPosition(position) as Doctor
+                loadHours(doctor.id, etScheduleDate.text.toString())
+            }
+        }
+
+        etScheduleDate.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val doctor= spinnerDoctors.selectedItem as Doctor
+                loadHours(doctor.id,etScheduleDate.text.toString())
+            }
+        })
+
+    }
+
+    private fun loadHours(doctorId: Int, date: String){
+        val call = apiService.getHours(doctorId, date)
+        call.enqueue(object : Callback<Schedule>{
+            override fun onFailure(call: Call<Schedule>, t: Throwable) {
+                Toast.makeText(activity, "Error en cargar horarios", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Schedule>, response: Response<Schedule>) {
+                if (response.isSuccessful){
+                    val schedule = response.body()
+                    Toast.makeText(activity,
+                        "Morning: ${schedule?.morning?.size} - Afternoon: ${schedule?.afternoon?.size}",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        //Toast.makeText(activity, "Doctor: $doctorId, date: $date", Toast.LENGTH_SHORT).show()
+
+    }
+
+    private fun loadDoctors(specialtyId: Int){
+        val call =  apiService.getDoctorBySpecialty(specialtyId)
+        call.enqueue(object : Callback<ArrayList<Doctor>>{
+            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
+                Toast.makeText(activity, "Ocurrio un problema al cargar los medicos", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(
+                call: Call<ArrayList<Doctor>>,
+                response: Response<ArrayList<Doctor>>
+            ) {
+                if(response.isSuccessful){
+                    val doctors = response.body()
+                    spinnerDoctors.adapter = ArrayAdapter<Doctor>(requireActivity().baseContext, android.R.layout.simple_list_item_1,
+                        doctors!!
+                    )
+                }
+            }
+        })
     }
 
     private fun loadSpecialties(){
@@ -134,27 +251,6 @@ class DatesFragment: Fragment()  {
         }
     }
 
-    private fun loadDoctors(specialtyId: Int){
-        val call =  apiService.getDoctorBySpecialty(specialtyId)
-        call.enqueue(object : Callback<ArrayList<Doctor>>{
-            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
-                Toast.makeText(activity, "Ocurrio un problema al cargar los medicos", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(
-                call: Call<ArrayList<Doctor>>,
-                response: Response<ArrayList<Doctor>>
-            ) {
-                if(response.isSuccessful){
-                    val doctors = response.body()
-                    spinnerDoctors.adapter = ArrayAdapter<Doctor>(requireActivity().baseContext, android.R.layout.simple_list_item_1,
-                        doctors!!
-                    )
-                }
-            }
-        })
-    }
-
     private fun openFragment(fragment: Fragment){
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
@@ -173,27 +269,6 @@ class DatesFragment: Fragment()  {
         tvConfirmDoctor.text = spinnerDoctors.selectedItem.toString()
         tvConfirmDate.text = etScheduleDate.text.toString()
         tvConfirmTime.text = selectedTimeRadioBtn?.text.toString()
-    }
-
-    private fun showDatePickerDialog() {
-        val newFragment =
-            DatePickerFragment.newInstance(
-                DatePickerDialog.OnDateSetListener { datepicker, y, m, d ->
-                    selectedCalendar.set(y, m, d)
-                    etScheduleDate.setText(
-                        resources.getString(
-                            R.string.date_format,
-                            y,
-                            m.twoDigits(),
-                            d.twoDigits()
-                        )
-                    )
-                    val selectedDate = d.toString() + " / " + (m + 1) + " / " + y
-                    etScheduleDate.setText(selectedDate)
-                    etScheduleDate.error = null
-                    displayRadioButtons()
-                })
-        newFragment.show(requireActivity().supportFragmentManager, "datePicker")
     }
 
     private fun displayRadioButtons() {
@@ -226,5 +301,5 @@ class DatesFragment: Fragment()  {
         }
     }
 
-    private fun Int.twoDigits() = if (this <= 9) this.toString() else "0$this"
+    private fun Int.twoDigits() = if (this >= 10) this.toString() else "0$this"
 }
