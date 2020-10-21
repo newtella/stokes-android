@@ -7,10 +7,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
 import com.codigogt.stokes.io.ApiService
@@ -18,13 +17,13 @@ import com.codigogt.stokes.model.Doctor
 import com.codigogt.stokes.model.Schedule
 import com.codigogt.stokes.model.Specialty
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_date_create.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_one.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_one.view.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_three.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_three.view.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_two.*
 import kotlinx.android.synthetic.main.fragment_date_card_view_step_two.view.*
+import kotlinx.android.synthetic.main.fragment_date_create.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,6 +56,7 @@ class DatesFragment: Fragment()  {
             } else {
                 cvStep1.visibility = View.GONE
                 cvStep2.visibility = View.VISIBLE
+                radioGroupLeft.removeAllViews()
             }
         }
 
@@ -68,16 +68,16 @@ class DatesFragment: Fragment()  {
                         R.string.validate_appointment_date, Snackbar.LENGTH_SHORT).show()
                     etScheduleDate.error = getString(R.string.validate_appointment_date)
                 }
-                selectedTimeRadioBtn == null ->
+                tvHourNotFound.visibility == View.VISIBLE ->{
                     Snackbar.make(createAppointmentLinearLayout,
                         R.string.validate_appointment_time, Snackbar.LENGTH_SHORT).show()
-                else -> {
+
+                }else ->  {
                     showAppointmentDataToConfirm()
                     cvStep2.visibility = View.GONE
                     cvStep3.visibility = View.VISIBLE
                 }
             }
-
         }
 
         view.btnConfirmAppointment.setOnClickListener {
@@ -173,15 +173,24 @@ class DatesFragment: Fragment()  {
         val call = apiService.getHours(doctorId, date)
         call.enqueue(object : Callback<Schedule>{
             override fun onFailure(call: Call<Schedule>, t: Throwable) {
-                Toast.makeText(activity, "Error en cargar horarios", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity, "Error en cargar horarios", Toast.LENGTH_SHORT).show()
+                //tvHourNotFound.visibility = View.VISIBLE
             }
 
             override fun onResponse(call: Call<Schedule>, response: Response<Schedule>) {
                 if (response.isSuccessful){
+                    tvHourNotFound.visibility = View.GONE
+                    tvPickADateForHour.visibility = View.GONE
                     val schedule = response.body()
-                    Toast.makeText(activity,
-                        "Morning: ${schedule?.morning?.size} - Afternoon: ${schedule?.afternoon?.size}",
-                        Toast.LENGTH_SHORT).show()
+                    schedule?.let {
+                        val intervals = it.morning + it.afternoon
+                        val hours = ArrayList<String>()
+                        intervals.forEach { intervals ->
+                            hours.add(intervals.start)
+                        }
+                        displayIntervalRadios(hours)
+                    }
+                    // Toast.makeText(activity, "Morning: ${schedule?.morning?.size} - Afternoon: ${schedule?.afternoon?.size}", Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -271,15 +280,48 @@ class DatesFragment: Fragment()  {
         tvConfirmTime.text = selectedTimeRadioBtn?.text.toString()
     }
 
-    private fun displayRadioButtons() {
-        // radioGroup.clearCheck()
-        //  radioGroup.removeAllViews()
+    private fun displayIntervalRadios(hours: ArrayList<String>) {
+        if (hours.isEmpty()){
+            radioGroupLeft.removeAllViews()
+            Toast.makeText(activity, "No se encontraron Horarios disponibles", Toast.LENGTH_SHORT).show()
+            tvHourNotFound.visibility = View.VISIBLE
+        }else{
+            radioGroupLeft.removeAllViews()
+            tvHourNotFound.visibility = View.GONE
+            val hoursArray: Array<String> = hours.toTypedArray()
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("Seleccione la hora")
+            builder.setItems(hoursArray){ _, which ->
+                Toast.makeText(activity, "Hora seleccionada: ${hours[which]}", Toast.LENGTH_SHORT).show()
 
-        selectedTimeRadioBtn = null
+
+                val radioButton = RadioButton(activity)
+                radioButton.id = hours[which].lastIndex
+                radioButton.text = hours[which]
+                radioGroupLeft.addView(radioButton)
+                radioButton.isChecked = true
+
+                radioButton.setOnClickListener {view ->
+                    selectedTimeRadioBtn?.isChecked = false
+
+                    selectedTimeRadioBtn = view as RadioButton?
+                    selectedTimeRadioBtn?.isChecked = true
+                }
+
+                radioButton.performClick()
+
+            }
+            val dialog = builder.create()
+            dialog.show()
+
+        }
+
+
+        /*selectedTimeRadioBtn = null
         radioGroupLeft.removeAllViews()
         radioGroupRight.removeAllViews()
 
-        val hours = arrayOf("3:00", "3:30", "4:00", "4:30")
+        //val hours = arrayOf("3:00", "3:30", "4:00", "4:30")
         var goToLeft = true
 
         hours.forEach {
@@ -298,7 +340,7 @@ class DatesFragment: Fragment()  {
                 radioGroupRight.addView(radioButton)
             goToLeft = !goToLeft
 
-        }
+        }*/
     }
 
     private fun Int.twoDigits() = if (this >= 10) this.toString() else "0$this"

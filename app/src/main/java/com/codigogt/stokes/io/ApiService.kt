@@ -1,5 +1,6 @@
 package com.codigogt.stokes.io
 
+import com.codigogt.stokes.io.response.LoginResponse
 import com.codigogt.stokes.model.Doctor
 import com.codigogt.stokes.model.Schedule
 import com.codigogt.stokes.model.Specialty
@@ -9,6 +10,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -23,6 +25,10 @@ interface ApiService {
     @GET("schedule/hours")
     fun getHours(@Query("doctor_id") doctorId: Int, @Query("date") date: String ):
             Call<Schedule>
+
+    @POST("login")
+    fun postLogin(@Query("email", encoded = true) email: String, @Query("password") password: String ):
+            Call<LoginResponse>
 
     companion object Factory {
         private const val BASE_URL = "http://104.131.65.75/api/v1/"

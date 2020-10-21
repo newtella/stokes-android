@@ -51,6 +51,23 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/tvPickADateForHour"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Seleccione un medico y fecha"/>
+
+            <TextView
+
+                android:id="@+id/tvHourNotFound"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="No se encontraron horarios disponibles"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:baselineAligned="false"
                 android:layout_width="match_parent"
@@ -66,17 +83,11 @@
                     android:orientation="vertical">
 
                     <RadioButton
+                        android:id="@+id/hourRadioButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="08:00 AM" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="08:00 AM" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
-
-                <LinearLayout
+<!--                <LinearLayout
                     android:id="@+id/radioGroupRight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -87,15 +98,13 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="08:00 AM" />
+                         />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="08:00 AM" />
-                </LinearLayout>
-
-
+                         />
+                </LinearLayout>-->
             </LinearLayout>
 
             <Button

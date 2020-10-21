@@ -1,4 +1,4 @@
-package com.codigogt.stokes
+package com.codigogt.stokes.util
 
 import android.content.Context
 import android.content.SharedPreferences
