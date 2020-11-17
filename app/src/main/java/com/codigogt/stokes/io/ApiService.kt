@@ -9,10 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -29,6 +26,10 @@ interface ApiService {
     @POST("login")
     fun postLogin(@Query("email", encoded = true) email: String, @Query("password") password: String ):
             Call<LoginResponse>
+
+    @POST("logout")
+    fun postLogout(@Header("Authorization") authHeader: String ):
+            Call<Void>
 
     companion object Factory {
         private const val BASE_URL = "http://104.131.65.75/api/v1/"

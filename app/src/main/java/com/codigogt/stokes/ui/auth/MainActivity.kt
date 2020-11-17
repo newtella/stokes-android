@@ -88,12 +88,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createSessionPreferences(jwt: String){
-        /*
-        val preferences = getSharedPreferences("general", Context.MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.putBoolean("session", true)
-        editor.apply()
-         */
         val preferences = PreferenceHelper.defaultPrefs(this)
         preferences["jwt"] = jwt
     }

@@ -42,5 +42,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="logout_category"
+        app:title="Cuenta">
+
+        <Preference
+            app:key="logout"
+            app:summary="Cierra la sesion iniciada en este dispositivo"
+            app:title="Cerrar Sesion"
+            app:icon="@drawable/ic_exit_to_app_72"/>
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen>

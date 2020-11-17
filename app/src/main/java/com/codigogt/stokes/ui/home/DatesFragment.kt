@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
 import com.codigogt.stokes.io.ApiService
@@ -88,8 +87,6 @@ class DatesFragment: Fragment()  {
 
         loadSpecialties()
 
-
-        val onClickCalendar = view.findViewById<View>(R.id.etScheduleDate)
 
 
         return view

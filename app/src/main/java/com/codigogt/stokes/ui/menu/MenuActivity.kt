@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.codigogt.stokes.R
+import com.codigogt.stokes.io.ApiService
 import com.codigogt.stokes.ui.home.AccountFragment
 import com.codigogt.stokes.ui.home.DatesFragment
 import com.codigogt.stokes.ui.home.HomeFragment
 import com.codigogt.stokes.ui.home.SettingsFragment
+import com.codigogt.stokes.util.PreferenceHelper
+import com.codigogt.stokes.util.PreferenceHelper.get
+import com.codigogt.stokes.util.PreferenceHelper.set
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -66,13 +70,6 @@ class MenuActivity : AppCompatActivity() {
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-    private fun clearSessionPreferences(){
-        val preferences = getSharedPreferences("general", Context.MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.putBoolean("session", false)
-        editor.apply()
     }
 
 }

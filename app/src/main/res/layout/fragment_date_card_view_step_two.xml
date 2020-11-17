@@ -3,7 +3,6 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:id="@+id/cvStep2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,35 +10,28 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     app:contentPadding="12dp">
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/label_doctor" />
-
             <Spinner
                 android:id="@+id/spinnerDoctors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/label_scheduled_date"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etScheduleDate"
                     android:layout_width="match_parent"
@@ -48,18 +40,14 @@
                     android:focusable="false"
                     android:inputType="date"
                     android:maxLines="1" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
             <TextView
                 android:id="@+id/tvPickADateForHour"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Seleccione un medico y fecha"/>
-
             <TextView
-
                 android:id="@+id/tvHourNotFound"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
@@ -67,13 +55,11 @@
                 android:layout_height="match_parent"
                 android:text="No se encontraron horarios disponibles"
                 android:visibility="gone" />
-
             <LinearLayout
                 android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <LinearLayout
                     android:id="@+id/radioGroupLeft"
                     android:layout_width="0dp"
@@ -87,26 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-<!--                <LinearLayout
-                    android:id="@+id/radioGroupRight"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                         />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                         />
-                </LinearLayout>-->
             </LinearLayout>
-
             <Button
                 android:id="@+id/btnNext2"
                 style="@style/menu_button"
@@ -114,10 +81,7 @@
                 android:layout_marginTop="12dp"
                 android:drawableEnd="@drawable/ic_keyboard_arrow_right"
                 android:text="@string/btn_next" />
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.cardview.widget.CardView>
 
